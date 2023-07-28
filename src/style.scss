@@ -1,6 +1,6 @@
 @import './styles/media';
 
-*{
+* {
   margin: 0;
 }
 
@@ -28,11 +28,11 @@ body {
     gap: 10px;
   }
 
-  menu{
+  menu {
     position: relative;
   }
 
-  .menu-btn, .menu-btn-active{
+  .menu-btn, .menu-btn-active {
     background: blue;
     color: white;
     padding: 8px 12px;
@@ -41,12 +41,12 @@ body {
     border-radius: 4px;
     transition: 0.4s;
 
-    @include medium{
+    @include medium {
       display: none;
     }
   }
 
-  .menu-btn-active{
+  .menu-btn-active {
     background: darkblue;
   }
 
@@ -57,10 +57,11 @@ body {
     background: lightblue;
     gap: 8px;
     right: 0;
-    border-radius: 12px;
+    border-radius: 8px;
     height: 0;
     overflow: hidden;
     transition: 0.4s;
+    z-index: 200;
 
     @include medium {
       height: auto;
@@ -73,59 +74,59 @@ body {
     }
   }
 
-  .show{
+  .show {
     height: auto;
     padding: 15px 35px;
     transition: 0.4s;
   }
 }
 
-.header, .footer{
+.header, .footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: lightblue;
   padding: 15px 20px;
 
-  .logo{
+  .logo {
     width: 40px;
     height: 40px;
     transform: rotate(0deg);
     transition: 0.5s;
 
-    &:hover{
+    &:hover {
       transition: 0.5s;
       transform: rotate(360deg);
     }
   }
 
-  .menu-list{
+  .menu-list {
     display: flex;
     gap: 20px;
     color: blue;
   }
 
-  li{
+  li {
     list-style: none;
     text-transform: none;
     font-size: 20px;
   }
 }
 
-.footer{
-  .menu-list{
+.footer {
+  .menu-list {
     flex-direction: column;
     gap: 8px;
     padding: 0;
   }
 
-  li{
+  li {
     font-size: 14px;
   }
 }
 
 
-.content{
+.content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -133,14 +134,14 @@ body {
   margin: 0 auto;
   width: -webkit-fill-available;
 
-  @include medium{
+  @include medium {
     width: 100%;
     max-width: 600px;
   }
 
 }
 
-.task-list{
+.task-list {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -148,23 +149,23 @@ body {
   margin: 20px 0;
 }
 
-.form{
+.form {
   width: 100%;
 }
 
-.wrap-label{
+.wrap-label {
   display: block;
   min-width: 0;
 }
 
-.label{
+.label {
   display: block;
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 10px;
 }
 
-.input-add{
+.input-add {
   display: block;
   border-radius: 12px;
   border: 1px solid blue;
@@ -173,7 +174,7 @@ body {
   width: -webkit-fill-available;
 }
 
-.section{
+.section {
   display: grid;
   grid-template-columns: 1fr 90px;
   gap: 10px;
@@ -181,7 +182,7 @@ body {
   width: 100%;
 }
 
-.btn-add{
+.btn-add {
   width: 100%;
   min-width: 80px;
   border-radius: 4px;
@@ -198,7 +199,7 @@ body {
   height: 34px;
   transition: 0.5s;
 
-  &:hover{
+  &:hover {
     opacity: 0.8;
     transition: 0.5s;
   }

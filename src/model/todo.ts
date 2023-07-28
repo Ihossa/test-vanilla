@@ -1,54 +1,58 @@
-import {ITodoItem} from "../interfaces/todo";
-import {TODO_STATUS} from "../constants/todo";
-import {Store} from "../store/store";
-import {TodoItem} from "../components/Todo/TodoItem";
+import { ITodoItem } from "../interfaces/todo";
+import { TODO_STATUS } from "../constants/todo";
+import { Store } from "../store/store";
+import { TodoItem } from "../components/Todo/TodoItem";
 
 export class TodoList {
-    form: HTMLFormElement
-    todoContainer: Element
+  form: HTMLFormElement;
+  todoContainer: Element;
 
-    constructor(form: HTMLFormElement, todoContainer: Element) {
-        this.form = form;
-        this.todoContainer = todoContainer;
+  constructor(form: HTMLFormElement, todoContainer: Element) {
+    this.form = form;
+    this.todoContainer = todoContainer;
+  }
+
+  init() {
+    const todos = Store.getAllTodos();
+
+    if (!todos) {
+      return;
     }
 
-    init() {
-        const todos = Store.getAllTodos()
+    const container = document.createDocumentFragment();
 
-        if(!todos){
-            return;
-        }
+    todos.forEach((todoItem) => {
+      container.appendChild(TodoItem(todoItem));
+    });
 
-        const container = document.createDocumentFragment()
+    this.todoContainer.appendChild(container);
+  }
 
-        todos.forEach((todoItem) => {
-            container.appendChild(TodoItem(todoItem))
-        })
+  addTodoItem() {
+    const formData = new FormData(this.form);
+    const title = formData.get("title");
 
-        this.todoContainer.appendChild(container)
+    if (title === "") {
+      return;
     }
 
-    addTodoItem() {
-        const formData = new FormData(this.form);
-        const title = formData.get('title');
+    const generatedTask: ITodoItem = {
+      id: Date.now().toString(),
+      title: title.toString(),
+      status: TODO_STATUS.PLAN,
+    };
 
-        if(title === ''){
-            return;
-        }
+    Store.addTodo(generatedTask);
+    this.todoContainer.appendChild(TodoItem(generatedTask));
 
-        const generatedTask: ITodoItem = {id: Date.now().toString(), title: title.toString(), status: TODO_STATUS.PLAN}
+    this.form.reset();
+  }
 
-        Store.addTodo(generatedTask)
-        this.todoContainer.appendChild(TodoItem(generatedTask))
+  removeTodoItem(id: string) {
+    Store.deleteTodoItem(id);
+  }
 
-        this.form.reset()
-    }
-
-    removeTodoItem(id:string) {
-        Store.deleteTodoItem(id)
-    }
-
-    changeTodoStatus(id:string, status: TODO_STATUS) {
-        Store.updateStatus(id, status)
-    }
+  changeTodoStatus(id: string, status: TODO_STATUS) {
+    Store.updateStatus(id, status);
+  }
 }
