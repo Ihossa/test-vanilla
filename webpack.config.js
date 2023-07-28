@@ -17,7 +17,6 @@ const optimization = () => {
 
     if (isProd) {
         config.minimizer = [
-            new OptimizeCssAssetWebpackPlugin(),
             new TerserWebpackPlugin()
         ]
     }
@@ -68,6 +67,7 @@ const plugins = () => {
 
 }
 
+
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     mode: 'development',
@@ -89,7 +89,6 @@ module.exports = {
         port: 4200,
         hot: isDev
     },
-    devtool: isDev ? 'source-map' : '',
     plugins: plugins(),
     module: {
         rules: [
